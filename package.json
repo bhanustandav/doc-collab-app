@@ -2,7 +2,7 @@
   "name": "doc-ver-app",
   "version": "0.1.0",
   "private": true,
-    "homepage": "http://bhanustandav.github.io/doc-collab-app/",
+    "homepage": "https://bhanustandav.github.io/doc-collab-app/",
   "dependencies": {
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
