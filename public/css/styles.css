@@ -1,0 +1,38 @@
+body{
+	font-size:14px;
+}
+.img-profile.rounded-circle, .sidebar .nav-item .nav-link .img-profile, .topbar .nav-item .nav-link .img-profile{
+width:16px;
+height:16px;
+}
+.sidebar-brand-text {
+	font-size:25px;
+}
+.sidebar-brand-text:hover, .sidebar-brand-text, a.sidebar-brand:hover{
+	text-decoration:none;
+}
+.sidebar{
+	margin-top:-22px;
+	padding-top:22px;
+}
+#wrapper #content-wrapper{
+	background:none !important;
+}
+.sticky-footer.bg-white{
+	background:#f1f1f1 !important;
+}
+#dataTable{
+	font-size:14px;
+}
+.sidebar-dark .nav-item .nav-link{
+	color:rgba(255,255,255,0.95);
+}
+.table thead th{
+	background:#f1f1f1;
+}
+.sidebar hr.sidebar-divider{
+	margin:0px;
+}
+.sidebar-dark .nav-item .nav-link i {
+    color: rgba(255,255,255,.95);
+}
