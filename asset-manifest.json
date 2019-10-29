@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/bhanu-standav/doc-collab-app/static/css/main.b100e6da.chunk.css",
+    "main.js": "/bhanu-standav/doc-collab-app/static/js/main.0a988866.chunk.js",
+    "main.js.map": "/bhanu-standav/doc-collab-app/static/js/main.0a988866.chunk.js.map",
+    "runtime-main.js": "/bhanu-standav/doc-collab-app/static/js/runtime-main.ad41f90f.js",
+    "runtime-main.js.map": "/bhanu-standav/doc-collab-app/static/js/runtime-main.ad41f90f.js.map",
+    "static/js/2.1c367a13.chunk.js": "/bhanu-standav/doc-collab-app/static/js/2.1c367a13.chunk.js",
+    "static/js/2.1c367a13.chunk.js.map": "/bhanu-standav/doc-collab-app/static/js/2.1c367a13.chunk.js.map",
+    "index.html": "/bhanu-standav/doc-collab-app/index.html",
+    "precache-manifest.0029fcca9e7b92ba7e1cc0dabba4bbf6.js": "/bhanu-standav/doc-collab-app/precache-manifest.0029fcca9e7b92ba7e1cc0dabba4bbf6.js",
+    "service-worker.js": "/bhanu-standav/doc-collab-app/service-worker.js",
+    "static/css/main.b100e6da.chunk.css.map": "/bhanu-standav/doc-collab-app/static/css/main.b100e6da.chunk.css.map",
+    "static/media/logo.svg": "/bhanu-standav/doc-collab-app/static/media/logo.25bf045c.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ad41f90f.js",
+    "static/js/2.1c367a13.chunk.js",
+    "static/css/main.b100e6da.chunk.css",
+    "static/js/main.0a988866.chunk.js"
+  ]
+}
