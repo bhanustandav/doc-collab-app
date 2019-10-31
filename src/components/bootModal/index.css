@@ -1,0 +1,19 @@
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 0rem !important;
+    height: 100%;
+}
+.modal-content {
+    height: 90%;
+}
+.modal-90w {
+    max-width: 98% !important;
+    height: 100%;
+}
+.modal-dialog {
+    margin: .5rem !important;
+}
+.modal-header {
+    padding: 0rem 0rem !important;
+}
