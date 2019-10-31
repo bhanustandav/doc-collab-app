@@ -1,6 +1,23 @@
 import React from 'react'
+// import {createFile} from '../../api/file'
 
 export default class FileList extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state={}
+    }
+
+    componentDidMount() {
+        // createFile() .then(function (response) {
+        //     //handle success
+        //     console.log(response);
+        // })
+        //     .catch(function (response) {
+        //         //handle error
+        //         console.log(response);
+        //     });
+    }
 
     renderFiles = () => {
         const {userFiles} = this.props
