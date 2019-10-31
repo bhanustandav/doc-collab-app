@@ -4,7 +4,7 @@ export const Sidebar = (props) =>  <ul className="navbar-nav bg-gradient-primary
     <li className="nav-item">
         <a className="nav-link" href="#">
             <i className="fas fa-file-alt"></i>
-            <span> Create a New file</span>
+            <span onClick={props.createFileEvent}> Create a New file</span>
         </a>
 
     </li>

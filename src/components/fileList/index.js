@@ -1,5 +1,6 @@
 import React from 'react'
 // import {createFile} from '../../api/file'
+import "./index.css";
 
 export default class FileList extends React.Component {
 
@@ -18,9 +19,13 @@ export default class FileList extends React.Component {
         //         console.log(response);
         //     });
     }
+    openFile = (file) => {
+        console.log(file);
+        this.props.openFileEvent(file);
+    };
 
     renderFiles = () => {
-        const {userFiles} = this.props
+        const {userFiles} = this.props;
 
         return <div className="table-responsive">
             <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
@@ -30,31 +35,24 @@ export default class FileList extends React.Component {
                     <th> Type</th>
                     <th> Created On</th>
                     <th> Modified On</th>
-
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr>
-                    <td><a href="#">NDA-1.docx</a></td>
-                    <td> Document</td>
-                    <td> 2hours ago</td>
-                    <td> 2hours ago</td>
-
-                </tr>
-                <tr>
-                    <td><a href="#">NDA-1.docx</a></td>
-                    <td> Document</td>
-                    <td> 2hours ago</td>
-                    <td> 2hours ago</td>
-
-                </tr>
-
+                {userFiles.map((item)=>{
+                    return (
+                        <tr key={`tr-${Math.random()}`}>
+                            <td><span className={`file-link`} onClick={name=>this.openFile(`${item.name}`)}>{item.name}</span></td>
+                            <td> {item.type}</td>
+                            <td> {item.createdOn}</td>
+                            <td> {item.modifiedOn}</td>
+                        </tr>
+                    )
+                })}
                 </tbody>
             </table>
         </div>
-
-    }
+    };
 
     render() {
         return <>
