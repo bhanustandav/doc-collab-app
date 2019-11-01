@@ -15,4 +15,4 @@ export const createFile = () => {
         data: bodyFormData,
         config: { headers: {'Access-Control-Allow-Origin': 'http://localhost:3000','Content-Type': 'multipart/form-data' }}
     })
-}
+};

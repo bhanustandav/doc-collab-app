@@ -1,6 +1,6 @@
 import React from 'react'
 import {Navbar} from "../../components/navbar";
-import {Sidebar} from "../../components/sidebar";
+import Sidebar from "../../components/sidebar";
 import BootModal from "../../components/bootModal";
 import ContentWrapper from "../../components/contentWrapper";
 import {createFile} from "./../../api/file";
@@ -19,14 +19,7 @@ export default class Home extends React.Component {
                 {name:'NDA-1.docx',type:'word',createdOn:this.formatDate(new Date),modifiedOn:this.formatDate(new Date)},
                 {name:'NDA-2.docx',type:'word',createdOn:this.formatDate(new Date),modifiedOn:this.formatDate(new Date)}
             ],
-            createFileData : {
-                "session_delete_url": "https://writer.zoho.com/writer/officeapi/v1/session/bbda95e506ae523864b5684c1d7c9bc800011ecebf8d695ee0d3bbb50153431e80387d3019143b0438538e7915409a173afcfcb939d49392abd4f1432250af5c6176368926d8e702bbb2c9e29dd68cb6",
-                "save_url": "https://writer.zoho.com/writer/officeapi/v1/document/bbda95e506ae523864b5684c1d7c9bc800011ecebf8d695ee0d3bbb50153431e80387d3019143b0438538e7915409a173afcfcb939d49392abd4f1432250af5c6176368926d8e702bbb2c9e29dd68cb6/save",
-                "session_id": "bbda95e506ae523864b5684c1d7c9bc800011ecebf8d695ee0d3bbb50153431e80387d3019143b0438538e7915409a173afcfcb939d49392abd4f1432250af5c6176368926d8e702bbb2c9e29dd68cb6",
-                "document_delete_url": "https://writer.zoho.com/writer/officeapi/v1/document/1349",
-                "document_id": "1349",
-                "document_url": "https://writer.zoho.com/writer/officeapi/v1/document/bbda95e506ae523864b5684c1d7c9bc800011ecebf8d695ee0d3bbb50153431e80387d3019143b0438538e7915409a173afcfcb939d49392abd4f1432250af5c6176368926d8e702bbb2c9e29dd68cb6/open"
-            }
+            createFileData : {}
         }
     }
     formatDate = (date) => {
@@ -44,19 +37,33 @@ export default class Home extends React.Component {
     coeditFileEvent = (file) => {
 
     };
+    openInNewTab = (href) => {
+        console.log(href);
+        var evLink = document.createElement('a');
+        evLink.setAttribute('href',href);
+        evLink.setAttribute('target','_blank');
+        document.body.appendChild(evLink);
+        evLink.click();
+        evLink.parentNode.removeChild(evLink);
+    };
 
-    createFileEvent = () =>{
-        // this.modalVisibility();
+    createFileEvent = (tab) =>{
+        let {createFileData} = this.state;
+        // console.log(tab);
         createFile().then(res=>{
             this.setState({createFileData: res.data},()=>{
-                this.modalVisibility();
+                if( tab === 'pop' )
+                    this.modalVisibility();
+                else
+                    this.openInNewTab(createFileData['document_url']);
             });
         })
     };
+
     modalVisibility = () => {
         let {showModal} = this.state;
         this.setState({showModal: !showModal},()=>{
-            console.log(this.state.showModal);
+            // console.log(this.state.showModal);
         })
     };
 
@@ -65,7 +72,7 @@ export default class Home extends React.Component {
         return <>
             <Navbar/>
             <div id="wrapper">
-                <Sidebar createFileEvent={this.createFileEvent}/>
+                <Sidebar createFileEvent={this.createFileEvent} url={createFileData['document_url']}/>
                 <ContentWrapper>
                     {userFiles && <Filelist openFileEvent={this.openFileEvent} {...this.state}/>}
 
@@ -77,4 +84,3 @@ export default class Home extends React.Component {
         </>
     }
 }
-
