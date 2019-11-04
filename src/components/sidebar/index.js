@@ -18,10 +18,10 @@ export default class Sidebar extends React.Component{
                             <span onClick={tab=>this.clickNew('pop')}> New </span>
                         </a>
 
-                        <a className="nav-link" href="#">
-                            <i className="fas fa-file-alt"></i>
-                            <span className={`nav-link`} onClick={tab=>this.clickNew('tab')}>New [Opens new window]</span>
-                        </a>
+                        {/*<a className="nav-link" href="#">*/}
+                        {/*    <i className="fas fa-file-alt"></i>*/}
+                        {/*    <span className={`nav-link`} onClick={tab=>this.clickNew('tab')}>New [Opens new window]</span>*/}
+                        {/*</a>*/}
                     </li>
                     <hr className="sidebar-divider"/>
                     <li className="nav-item">

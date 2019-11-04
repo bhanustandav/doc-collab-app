@@ -1,12 +1,16 @@
 import React from 'react'
-// import {createFile} from '../../api/file'
 import "./index.css";
+import moment from "moment";
+import BootModal from "../bootModal";
 
 export default class FileList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={}
+        this.state = {
+            showModal: false,
+            currentFile: {}
+        }
     }
 
     componentDidMount() {
@@ -19,9 +23,23 @@ export default class FileList extends React.Component {
         //         console.log(response);
         //     });
     }
-    openFile = (file) => {
+
+    formatDate = (date) => {
+        return moment(date).format('llll')
+    };
+
+    editFile = (file) => {
         console.log(file);
-        this.props.openFileEvent(file);
+        this.setState({currentFile:file},()=>{
+            this.props.editFileEvent(file);
+        });
+    };
+
+    modalVisibility = () => {
+        let {showModal} = this.state;
+        this.setState({showModal: !showModal},()=>{
+            // console.log(this.state.showModal);
+        })
     };
 
     renderFiles = () => {
@@ -31,7 +49,7 @@ export default class FileList extends React.Component {
             <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                 <thead>
                 <tr>
-                    <th>Name</th>
+                    <th> Name</th>
                     <th> Type</th>
                     <th> Created On</th>
                     <th> Modified On</th>
@@ -42,10 +60,10 @@ export default class FileList extends React.Component {
                 {userFiles.map((item)=>{
                     return (
                         <tr key={`tr-${Math.random()}`}>
-                            <td><span className={`file-link`} onClick={name=>this.openFile(`${item.name}`)}>{item.name}</span></td>
-                            <td> {item.type}</td>
-                            <td> {item.createdOn}</td>
-                            <td> {item.modifiedOn}</td>
+                            <td><span className={`file-link`} onClick={name=>this.editFile(item)}>{item.documentName}</span></td>
+                            <td> {item.documentFormat}</td>
+                            <td> {this.formatDate(item.createdAt)}</td>
+                            <td> {this.formatDate(item.createdAt)}</td>
                         </tr>
                     )
                 })}
@@ -55,6 +73,7 @@ export default class FileList extends React.Component {
     };
 
     render() {
+        const {showModal, currentFile} = this.state;
         return <>
             {this.renderFiles()}
         </>

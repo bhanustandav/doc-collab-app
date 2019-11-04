@@ -3,7 +3,7 @@ import {Navbar} from "../../components/navbar";
 import Sidebar from "../../components/sidebar";
 import BootModal from "../../components/bootModal";
 import ContentWrapper from "../../components/contentWrapper";
-import {createFile} from "./../../api/file";
+import {createFileLocal, createFileZoho, docList, editFileZoho} from "./../../api/file";
 import Filelist from "../../components/fileList";
 import moment from "moment";
 
@@ -15,28 +15,40 @@ export default class Home extends React.Component {
 
         this.state = {
             showModal: false,
-            userFiles: [
-                {name:'NDA-1.docx',type:'word',createdOn:this.formatDate(new Date),modifiedOn:this.formatDate(new Date)},
-                {name:'NDA-2.docx',type:'word',createdOn:this.formatDate(new Date),modifiedOn:this.formatDate(new Date)}
-            ],
-            createFileData : {}
+            userFiles: [],
+            fileData : {}
         }
     }
-    formatDate = (date) => {
-        return moment(date).format('MM/DD/YYYY HH:MM')
-    };
+
+    componentDidMount() {
+        this.docListEvent(5);
+    }
 
     openFileEvent = (file) => {
-        console.log('open', file);
+        editFileZoho(file).then(res=>{
+            console.log(res.data);
+        });
     };
 
     editFileEvent = (file) => {
-
+        editFileZoho(file).then(res=>{
+            this.modalVisibility();
+            console.log(res.data);
+        });
     };
 
     coeditFileEvent = (file) => {
 
     };
+
+    docListEvent = (id) => {
+        docList(id).then(res=>{
+            this.setState({userFiles: res.data},()=>{
+                console.log( this.state.userFiles )
+            });
+        })
+    };
+
     openInNewTab = (href) => {
         console.log(href);
         var evLink = document.createElement('a');
@@ -48,14 +60,21 @@ export default class Home extends React.Component {
     };
 
     createFileEvent = (tab) =>{
-        let {createFileData} = this.state;
+        let {fileData} = this.state;
         // console.log(tab);
-        createFile().then(res=>{
-            this.setState({createFileData: res.data},()=>{
+        let id = Math.floor(Math.random() * 100);
+        let data = {
+            documentName: "NDA_" + id,
+            documentFormat: "docx",
+            documentId: id
+        };
+        createFileZoho(data).then(res=>{
+            this.setState({fileData: res.data},()=>{
+                createFileLocal({document: res.data,...data});
                 if( tab === 'pop' )
                     this.modalVisibility();
                 else
-                    this.openInNewTab(createFileData['document_url']);
+                    this.openInNewTab(fileData['document_url']);
             });
         })
     };
@@ -63,21 +82,30 @@ export default class Home extends React.Component {
     modalVisibility = () => {
         let {showModal} = this.state;
         this.setState({showModal: !showModal},()=>{
+            this.docListEvent(5);
             // console.log(this.state.showModal);
         })
     };
 
+    handleClose = () => {
+        console.log('modal closed');
+    };
+
     render() {
-        let {createFileData, showModal, userFiles} = this.state;
+        let {fileData, showModal, userFiles} = this.state;
         return <>
             <Navbar/>
             <div id="wrapper">
-                <Sidebar createFileEvent={this.createFileEvent} url={createFileData['document_url']}/>
+                <Sidebar createFileEvent={this.createFileEvent} url={fileData['document_url']}/>
                 <ContentWrapper>
-                    {userFiles && <Filelist openFileEvent={this.openFileEvent} {...this.state}/>}
+                    {userFiles && <Filelist editFileEvent={this.editFileEvent} openFileEvent={this.openFileEvent} {...this.state}/>}
 
-                    {showModal && <BootModal showModal={showModal} modalVisibility={this.modalVisibility}>
-                        <iframe scrolling={`no`} width={`100%`} height={`100%`} title={`editor`} src={createFileData['document_url']}/>
+                    {showModal && <BootModal
+                        showModal={showModal}
+                        modalVisibility={this.modalVisibility}
+                        onExit={this.handleClose}
+                        animation={true}>
+                        <iframe scrolling={`no`} width={`100%`} height={`100%`} title={`editor`} src={fileData['document_url']}/>
                     </BootModal>}
                 </ContentWrapper>
             </div>
