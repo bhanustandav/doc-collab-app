@@ -15,7 +15,7 @@ export default class Sidebar extends React.Component{
                     <li className="nav-item">
                         <a className="nav-link" href="#">
                             <i className="fas fa-file-alt"></i>
-                            <span onClick={tab=>this.clickNew('pop')}> New </span>
+                            <span onClick={tab=>this.clickNew('pop')}> New Document </span>
                         </a>
 
                         {/*<a className="nav-link" href="#">*/}

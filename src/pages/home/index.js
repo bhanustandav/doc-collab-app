@@ -74,7 +74,11 @@ export default class Home extends React.Component {
                 if( tab === 'pop' )
                     this.modalVisibility();
                 else
+                {
                     this.openInNewTab(fileData['document_url']);
+                    this.docListEvent(5);
+                }
+
             });
         })
     };
