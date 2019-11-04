@@ -94,7 +94,7 @@ export default class Home extends React.Component {
     render() {
         let {fileData, showModal, userFiles} = this.state;
         return <>
-            <Navbar/>
+            {/*<Navbar/>*/}
             <div id="wrapper">
                 <Sidebar createFileEvent={this.createFileEvent} url={fileData['document_url']}/>
                 <ContentWrapper>
